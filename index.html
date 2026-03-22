@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Solo Leveling">
-    <meta name="theme-color" content="#0a0e1a">
-    <title>Solo Leveling System - Shadow Monarch Evolution</title>
+    <title>Solo Leveling: Shadow Monarch Ascension</title>
     <style>
         * {
             margin: 0;
@@ -17,24 +15,21 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
             color: #e0e0e0;
             min-height: 100vh;
-            overflow-x: hidden;
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Smooth Scrolling & iOS Optimizations */
         .container {
             max-width: 500px;
             margin: 0 auto;
             padding: 16px;
             padding-top: env(safe-area-inset-top);
-            padding-bottom: calc(20px + env(safe-area-inset-bottom));
         }
 
-        /* Header with iOS Blur Effect */
+        /* Header */
         .header {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(20px);
@@ -44,15 +39,12 @@
             top: 0;
             z-index: 1000;
             border-bottom: 2px solid #7c3aed;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .logo {
@@ -62,21 +54,15 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; text-shadow: 0 0 10px #7c3aed; }
         }
 
         .level-display {
             background: rgba(124, 58, 237, 0.2);
             padding: 6px 12px;
             border-radius: 20px;
-            border: 1px solid #7c3aed;
             font-size: 0.85rem;
             font-weight: 600;
+            border: 1px solid #7c3aed;
         }
 
         /* Stats Grid */
@@ -90,21 +76,14 @@
         .stat-card {
             background: rgba(30, 35, 50, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 16px;
             border: 1px solid rgba(124, 58, 237, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .stat-card:active {
-            transform: scale(0.98);
         }
 
         .stat-title {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             color: #9ca3af;
             margin-bottom: 8px;
         }
@@ -118,23 +97,22 @@
         .stat-bar {
             margin-top: 12px;
             height: 6px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
         }
 
         .stat-fill {
             height: 100%;
-            background: linear-gradient(90deg, #7c3aed, #a855f7, #ec489a);
+            background: linear-gradient(90deg, #7c3aed, #a855f7);
             border-radius: 3px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s;
         }
 
-        /* Form Section */
-        .form-section {
+        /* Form */
+        .form-section, .fighting-section {
             background: rgba(30, 35, 50, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 20px;
@@ -149,39 +127,29 @@
             margin-bottom: 8px;
             color: #9ca3af;
             font-size: 0.85rem;
-            font-weight: 500;
         }
 
         input, select {
             width: 100%;
             padding: 12px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             border: 1px solid #7c3aed;
             border-radius: 12px;
             color: white;
             font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
         }
 
         button {
             background: linear-gradient(135deg, #7c3aed, #a855f7);
-            color: white;
             border: none;
-            padding: 14px 20px;
+            padding: 14px;
             border-radius: 12px;
-            cursor: pointer;
-            font-size: 1rem;
+            color: white;
             font-weight: 600;
-            transition: all 0.3s;
+            font-size: 1rem;
             width: 100%;
-            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.1s;
         }
 
         button:active {
@@ -189,667 +157,484 @@
         }
 
         /* Workout Cards */
-        .workout-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: #7c3aed;
-            border-left: 4px solid #7c3aed;
-            padding-left: 12px;
-        }
-
         .workout-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 12px;
+            margin-bottom: 20px;
         }
 
         .workout-card {
             background: rgba(30, 35, 50, 0.7);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 16px;
+            border: 1px solid rgba(124,58,237,0.3);
+            transition: all 0.2s;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .workout-card:active {
-            transform: scale(0.98);
         }
 
         .workout-card.completed {
             opacity: 0.6;
-            background: rgba(124, 58, 237, 0.1);
+            background: rgba(124,58,237,0.1);
             border-color: #22c55e;
         }
 
-        .workout-card.completed::after {
-            content: '✓';
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            color: #22c55e;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+        .workout-icon { font-size: 2rem; margin-bottom: 8px; }
+        .workout-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+        .workout-description { color: #9ca3af; font-size: 0.85rem; margin-bottom: 12px; }
+        .workout-details { display: flex; justify-content: space-between; color: #7c3aed; font-size: 0.8rem; }
 
-        .workout-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-
-        .workout-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .workout-description {
-            color: #9ca3af;
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-        }
-
-        .workout-details {
-            display: flex;
-            justify-content: space-between;
-            color: #7c3aed;
+        /* Fighting Skills */
+        .skill-badge {
+            display: inline-block;
+            background: rgba(124,58,237,0.2);
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin: 4px;
             font-size: 0.8rem;
-            font-weight: 500;
+            border: 1px solid #7c3aed;
         }
 
         /* AI Panel */
         .ai-panel {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 20px;
             margin-top: 20px;
             border: 2px solid #7c3aed;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #7c3aed, #ec489a, transparent);
-            animation: scan 2s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .ai-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .ai-status {
-            color: #22c55e;
-            font-weight: 600;
-            font-size: 0.85rem;
         }
 
         .ai-message {
-            background: rgba(124, 58, 237, 0.1);
+            background: rgba(124,58,237,0.1);
             padding: 12px;
             border-radius: 12px;
             margin: 12px 0;
             font-family: monospace;
-            font-size: 0.9rem;
-            line-height: 1.4;
         }
 
-        /* Daily Bonus */
         .daily-bonus {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(168, 85, 247, 0.2));
+            background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(168,85,247,0.2));
             border-radius: 20px;
             padding: 16px;
             margin-bottom: 20px;
             text-align: center;
             border: 1px solid #7c3aed;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.6); }
-        }
-
-        /* Achievements */
-        .progress-section {
-            margin-top: 20px;
         }
 
         .achievement-badge {
-            display: inline-block;
-            background: rgba(124, 58, 237, 0.2);
+            background: rgba(124,58,237,0.2);
             border-radius: 20px;
             padding: 6px 12px;
             margin: 4px;
             font-size: 0.75rem;
-            border: 1px solid #7c3aed;
-            animation: fadeIn 0.5s;
+            display: inline-block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Sound Toggle */
-        .sound-toggle {
+        .error-fixer {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(124, 58, 237, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            border: none;
-            font-size: 1.5rem;
-        }
-
-        /* Error Fixer */
-        .error-fixer {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.9);
             border-radius: 20px;
             padding: 8px 16px;
             display: none;
-            border-left: 3px solid #ef4444;
-            z-index: 2000;
             font-size: 0.8rem;
-            animation: slideIn 0.3s;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0a0e1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeOut 1s forwards;
-            animation-delay: 1.5s;
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
-
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #7c3aed;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="loading">
-        <div class="loader"></div>
+<div class="header">
+    <div class="nav">
+        <div class="logo">⚔️ SHADOW MONARCH ⚔️</div>
+        <div class="level-display" id="rankDisplay">E-Rank</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="daily-bonus" id="dailyBonus">🎁 Daily Login Bonus Available!</div>
+
+    <div class="form-section">
+        <h3>👤 Hunter Registration</h3>
+        <div class="form-group"><label>Name:</label><input type="text" id="userName" placeholder="Your name"></div>
+        <div class="form-group"><label>Age:</label><input type="number" id="userAge" placeholder="Age"></div>
+        <div class="form-group"><label>Weight (kg):</label><input type="number" id="userWeight" placeholder="Weight"></div>
+        <div class="form-group"><label>Height (cm):</label><input type="number" id="userHeight" placeholder="Height"></div>
+        <div class="form-group"><label>Fitness Level:</label>
+            <select id="fitnessLevel">
+                <option value="beginner">Beginner (E-Rank)</option>
+                <option value="intermediate">Intermediate (D-Rank)</option>
+                <option value="advanced">Advanced (C-Rank)</option>
+            </select>
+        </div>
+        <button id="initBtn">Initialize System</button>
     </div>
 
-    <div class="header">
-        <div class="nav">
-            <div class="logo">⚔️ SHADOW MONARCH ⚔️</div>
-            <div class="level-display" id="rankDisplay">E-Rank</div>
-        </div>
+    <div class="stats-section">
+        <div class="stat-card"><div class="stat-title">💪 Strength</div><div class="stat-value" id="strength">0</div><div class="stat-bar"><div class="stat-fill" id="strengthBar"></div></div></div>
+        <div class="stat-card"><div class="stat-title">🏃 Endurance</div><div class="stat-value" id="endurance">0</div><div class="stat-bar"><div class="stat-fill" id="enduranceBar"></div></div></div>
+        <div class="stat-card"><div class="stat-title">⚡ Agility</div><div class="stat-value" id="agility">0</div><div class="stat-bar"><div class="stat-fill" id="agilityBar"></div></div></div>
+        <div class="stat-card"><div class="stat-title">⭐ Experience</div><div class="stat-value" id="exp">0</div><div class="stat-bar"><div class="stat-fill" id="expBar"></div></div></div>
     </div>
 
-    <div class="container">
-        <!-- Daily Login Bonus -->
-        <div class="daily-bonus" id="dailyBonus">
-            🎁 Daily Login Bonus Available! 🎁
-        </div>
-
-        <!-- User Details Form -->
-        <div class="form-section">
-            <h3 style="margin-bottom: 16px;">👤 Hunter Registration</h3>
-            <div class="form-group">
-                <label>Name:</label>
-                <input type="text" id="userName" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Age:</label>
-                <input type="number" id="userAge" placeholder="Age">
-            </div>
-            <div class="form-group">
-                <label>Weight (kg):</label>
-                <input type="number" id="userWeight" placeholder="Weight">
-            </div>
-            <div class="form-group">
-                <label>Height (cm):</label>
-                <input type="number" id="userHeight" placeholder="Height">
-            </div>
-            <div class="form-group">
-                <label>Fitness Level:</label>
-                <select id="fitnessLevel">
-                    <option value="beginner">Beginner (E-Rank)</option>
-                    <option value="intermediate">Intermediate (D-Rank)</option>
-                    <option value="advanced">Advanced (C-Rank)</option>
-                </select>
-            </div>
-            <button onclick="updateUserProfile()">Initialize System</button>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats-section">
-            <div class="stat-card">
-                <div class="stat-title">💪 Strength</div>
-                <div class="stat-value" id="strength">0</div>
-                <div class="stat-bar"><div class="stat-fill" id="strengthBar" style="width: 0%"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">🏃 Endurance</div>
-                <div class="stat-value" id="endurance">0</div>
-                <div class="stat-bar"><div class="stat-fill" id="enduranceBar" style="width: 0%"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">⚡ Agility</div>
-                <div class="stat-value" id="agility">0</div>
-                <div class="stat-bar"><div class="stat-fill" id="agilityBar" style="width: 0%"></div></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">⭐ Experience</div>
-                <div class="stat-value" id="exp">0</div>
-                <div class="stat-bar"><div class="stat-fill" id="expBar" style="width: 0%"></div></div>
-            </div>
-        </div>
-
-        <!-- Workout Section -->
-        <div class="workout-section">
-            <h2 class="section-title">⚔️ Daily Quests</h2>
-            <div class="workout-grid" id="workoutGrid"></div>
-        </div>
-
-        <!-- AI Panel -->
-        <div class="ai-panel">
-            <div class="ai-header">
-                <span>🤖 SYSTEM AI</span>
-                <span class="ai-status" id="aiStatus">🟢 ONLINE</span>
-            </div>
-            <div class="ai-message" id="aiMessage">
-                Initializing Shadow Monarch Protocol...
-            </div>
-            <button onclick="getAIRecommendation()">Get AI Recommendation</button>
-        </div>
-
-        <!-- Progress Section -->
-        <div class="progress-section">
-            <h2 class="section-title">🏆 Achievements</h2>
-            <div id="achievements"></div>
-            <div id="rankInfo" style="margin-top: 12px;"></div>
-        </div>
+    <div class="fighting-section">
+        <h3>⚔️ Fighting Skills</h3>
+        <div id="skillsContainer"></div>
     </div>
 
-    <button class="sound-toggle" onclick="toggleSound()">🔊</button>
-    <div class="error-fixer" id="errorFixer">🔧 AI Auto-Fixing...</div>
+    <h2 class="section-title">⚔️ Daily Quests</h2>
+    <div id="workoutGrid" class="workout-grid"></div>
 
-    <script>
-        // Audio Context for Sound Effects
-        let soundEnabled = true;
-        let audioContext = null;
+    <div class="ai-panel">
+        <div><span>🤖 SYSTEM AI</span> <span id="aiStatus">🟢 ONLINE</span></div>
+        <div class="ai-message" id="aiMessage">Initializing Shadow Monarch Protocol...</div>
+        <button id="aiRecommendBtn">Get AI Recommendation</button>
+    </div>
 
-        function playSound(type) {
-            if (!soundEnabled) return;
-            try {
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                const oscillator = audioContext.createOscillator();
-                const gain = audioContext.createGain();
-                oscillator.connect(gain);
-                gain.connect(audioContext.destination);
-                
-                if (type === 'levelup') {
-                    oscillator.frequency.value = 880;
-                    gain.gain.value = 0.3;
-                    oscillator.start();
-                    gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.5);
-                    oscillator.stop(audioContext.currentTime + 0.5);
-                } else if (type === 'complete') {
-                    oscillator.frequency.value = 440;
-                    gain.gain.value = 0.2;
-                    oscillator.start();
-                    gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.3);
-                    oscillator.stop(audioContext.currentTime + 0.3);
-                }
-            } catch(e) {
-                console.log('Audio not supported');
-            }
+    <div class="progress-section">
+        <h2 class="section-title">🏆 Achievements</h2>
+        <div id="achievements"></div>
+        <div id="rankInfo"></div>
+    </div>
+</div>
+
+<div class="error-fixer" id="errorFixer">🔧 AI Auto-Fixing...</div>
+
+<script>
+    // ------------------- Global Variables -------------------
+    let userData = {
+        name: "Hunter", age: 25, weight: 70, height: 170, fitnessLevel: "beginner",
+        strength: 10, endurance: 10, agility: 10, exp: 0, level: 1,
+        completedWorkouts: [], achievements: [], lastLogin: null, streak: 0,
+        unlockedSkills: []
+    };
+
+    // Workouts database (all bodyweight)
+    const workoutLibrary = {
+        strength: [
+            { name: "Shadow Push-ups", description: "3 sets of 15-20 push-ups", sets: 3, reps: 18, exp: 50, type: "strength", icon: "💪", difficulty: "Medium" },
+            { name: "Monarch Squats", description: "3 sets of 25 bodyweight squats", sets: 3, reps: 25, exp: 50, type: "strength", icon: "🦵", difficulty: "Easy" },
+            { name: "Dagger Lunges", description: "3 sets of 12 lunges per leg", sets: 3, reps: 12, exp: 45, type: "strength", icon: "🗡️", difficulty: "Medium" },
+            { name: "Wall Sit", description: "Hold 60 sec, 3 sets", sets: 3, duration: 60, exp: 55, type: "strength", icon: "🧱", difficulty: "Hard" },
+            { name: "Tricep Dips", description: "3 sets of 12-15 dips (chair)", sets: 3, reps: 14, exp: 50, type: "strength", icon: "🪑", difficulty: "Medium" },
+            { name: "Plank Hold", description: "Hold 90 seconds", duration: 90, exp: 60, type: "strength", icon: "📏", difficulty: "Hard" }
+        ],
+        endurance: [
+            { name: "Eternal Running", description: "30 min jogging in place", duration: 30, exp: 80, type: "endurance", icon: "🏃", difficulty: "Medium" },
+            { name: "Burpee Rush", description: "4 sets of 15 burpees", sets: 4, reps: 15, exp: 70, type: "endurance", icon: "🤸", difficulty: "Hard" },
+            { name: "Mountain Climbers", description: "4 sets of 45 sec", sets: 4, duration: 45, exp: 65, type: "endurance", icon: "⛰️", difficulty: "Medium" },
+            { name: "High Knees", description: "5 sets of 60 sec", sets: 5, duration: 60, exp: 70, type: "endurance", icon: "🦵", difficulty: "Hard" },
+            { name: "Jumping Jacks", description: "150 reps total", reps: 150, exp: 60, type: "endurance", icon: "⭐", difficulty: "Easy" }
+        ],
+        agility: [
+            { name: "Shadow Steps", description: "Agility ladder drills 15 min", duration: 15, exp: 60, type: "agility", icon: "👣", difficulty: "Medium" },
+            { name: "Box Jumps", description: "3 sets of 15 jumps (low surface)", sets: 3, reps: 15, exp: 65, type: "agility", icon: "📦", difficulty: "Hard" },
+            { name: "Speed Skaters", description: "4 sets of 20 reps", sets: 4, reps: 20, exp: 60, type: "agility", icon: "⛸️", difficulty: "Medium" },
+            { name: "Crab Walks", description: "3 sets of 25 meters", sets: 3, exp: 55, type: "agility", icon: "🦀", difficulty: "Easy" },
+            { name: "Lateral Shuffles", description: "4 sets of 45 sec", sets: 4, duration: 45, exp: 65, type: "agility", icon: "↔️", difficulty: "Medium" }
+        ]
+    };
+
+    let currentWorkouts = []; // will be filled with a mix of workouts each day
+
+    // Fighting skills database (unlock by level)
+    const fightingSkills = [
+        { name: "Shadow Step", description: "Evade attacks with supernatural speed", levelReq: 3, statBonus: { agility: 5 } },
+        { name: "Dagger Strike", description: "Precise and lethal attack", levelReq: 5, statBonus: { strength: 5 } },
+        { name: "Monarch's Endurance", description: "Never tire in battle", levelReq: 8, statBonus: { endurance: 5 } },
+        { name: "Dark Barrier", description: "Summon a protective shield", levelReq: 12, statBonus: { strength: 8, endurance: 5 } },
+        { name: "Shadow Army", description: "Summon shadows to fight alongside", levelReq: 20, statBonus: { strength: 10, agility: 10 } },
+        { name: "Arise", description: "Revive fallen enemies as allies", levelReq: 30, statBonus: { strength: 15, endurance: 15, agility: 15 } }
+    ];
+
+    // Helper functions
+    function haptic(style = 'light') {
+        if (window.navigator && window.navigator.vibrate) {
+            if (style === 'light') window.navigator.vibrate(10);
+            else if (style === 'medium') window.navigator.vibrate(20);
+            else if (style === 'heavy') window.navigator.vibrate([30, 50, 30]);
         }
+    }
 
-        function toggleSound() {
-            soundEnabled = !soundEnabled;
-            const btn = document.querySelector('.sound-toggle');
-            btn.textContent = soundEnabled ? '🔊' : '🔇';
-            displayAIMessage(soundEnabled ? "Sound enabled!" : "Sound disabled");
+    function playSound(type) {
+        // Optional: Web Audio beep (we'll keep simple beep)
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!window.audioCtx) window.audioCtx = new AudioContext();
+            const ctx = window.audioCtx;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            if (type === 'levelup') { osc.frequency.value = 880; gain.gain.value = 0.2; osc.start(); gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5); osc.stop(ctx.currentTime + 0.5); }
+            else if (type === 'complete') { osc.frequency.value = 440; gain.gain.value = 0.15; osc.start(); gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3); osc.stop(ctx.currentTime + 0.3); }
+        } catch(e) { console.log("Audio not supported"); }
+    }
+
+    function saveUserData() { localStorage.setItem('soloLevelingData', JSON.stringify(userData)); }
+    function loadUserData() { const saved = localStorage.getItem('soloLevelingData'); if (saved) { const parsed = JSON.parse(saved); userData = { ...userData, ...parsed }; } }
+
+    // Daily workout reset: selects 3 random workouts from each category (or all if less)
+    function refreshDailyWorkouts() {
+        const today = new Date().toDateString();
+        const storedDate = localStorage.getItem('workoutDate');
+        if (storedDate === today && localStorage.getItem('dailyWorkouts')) {
+            currentWorkouts = JSON.parse(localStorage.getItem('dailyWorkouts'));
+        } else {
+            // Generate new daily set: pick 2 from each category (to keep total manageable)
+            const shuffled = (arr) => [...arr].sort(() => 0.5 - Math.random());
+            const strengthPick = shuffled(workoutLibrary.strength).slice(0, 2);
+            const endurancePick = shuffled(workoutLibrary.endurance).slice(0, 2);
+            const agilityPick = shuffled(workoutLibrary.agility).slice(0, 2);
+            currentWorkouts = [...strengthPick, ...endurancePick, ...agilityPick];
+            localStorage.setItem('dailyWorkouts', JSON.stringify(currentWorkouts));
+            localStorage.setItem('workoutDate', today);
         }
+        // Also reset completed workouts for the day
+        userData.completedWorkouts = [];
+        renderWorkouts();
+        saveUserData();
+    }
 
-        // User Data
-        let userData = {
-            name: "Hunter",
-            age: 25,
-            weight: 70,
-            height: 170,
-            fitnessLevel: "beginner",
-            strength: 10,
-            endurance: 10,
-            agility: 10,
-            exp: 0,
-            level: 1,
-            completedWorkouts: [],
-            achievements: [],
-            lastLogin: null,
-            streak: 0
-        };
-
-        // Enhanced Workouts Database
-        const workouts = {
-            strength: [
-                { name: "Shadow Push-ups", description: "3 sets of 15-20 push-ups", sets: 3, reps: 18, exp: 50, type: "strength", icon: "💪", difficulty: "Medium" },
-                { name: "Monarch Squats", description: "3 sets of 25 bodyweight squats", sets: 3, reps: 25, exp: 50, type: "strength", icon: "🦵", difficulty: "Easy" },
-                { name: "Dagger Lunges", description: "3 sets of 12 lunges per leg", sets: 3, reps: 12, exp: 45, type: "strength", icon: "🗡️", difficulty: "Medium" },
-                { name: "Wall Sit (Shadow Stance)", description: "Hold for 60 seconds, 3 sets", sets: 3, duration: 60, exp: 55, type: "strength", icon: "🧱", difficulty: "Hard" },
-                { name: "Tricep Dips", description: "3 sets of 12-15 dips using chair", sets: 3, reps: 14, exp: 50, type: "strength", icon: "🪑", difficulty: "Medium" },
-                { name: "Plank Hold", description: "Hold for 90 seconds", duration: 90, exp: 60, type: "strength", icon: "📏", difficulty: "Hard" }
-            ],
-            endurance: [
-                { name: "Eternal Running", description: "30 minutes jogging in place", duration: 30, exp: 80, type: "endurance", icon: "🏃", difficulty: "Medium" },
-                { name: "Burpee Rush", description: "4 sets of 15 burpees", sets: 4, reps: 15, exp: 70, type: "endurance", icon: "🤸", difficulty: "Hard" },
-                { name: "Mountain Climbers", description: "4 sets of 45 seconds", sets: 4, duration: 45, exp: 65, type: "endurance", icon: "⛰️", difficulty: "Medium" },
-                { name: "High Knees", description: "5 sets of 60 seconds", sets: 5, duration: 60, exp: 70, type: "endurance", icon: "🦵", difficulty: "Hard" },
-                { name: "Jumping Jacks", description: "150 reps total", reps: 150, exp: 60, type: "endurance", icon: "⭐", difficulty: "Easy" }
-            ],
-            agility: [
-                { name: "Shadow Steps", description: "Agility ladder drills 15 min", duration: 15, exp: 60, type: "agility", icon: "👣", difficulty: "Medium" },
-                { name: "Box Jumps", description: "3 sets of 15 jumps (low surface)", sets: 3, reps: 15, exp: 65, type: "agility", icon: "📦", difficulty: "Hard" },
-                { name: "Speed Skaters", description: "4 sets of 20 reps", sets: 4, reps: 20, exp: 60, type: "agility", icon: "⛸️", difficulty: "Medium" },
-                { name: "Crab Walks", description: "3 sets of 25 meters", sets: 3, exp: 55, type: "agility", icon: "🦀", difficulty: "Easy" },
-                { name: "Lateral Shuffles", description: "4 sets of 45 seconds", sets: 4, duration: 45, exp: 65, type: "agility", icon: "↔️", difficulty: "Medium" }
-            ]
-        };
-
-        let allWorkouts = [...workouts.strength, ...workouts.endurance, ...workouts.agility];
-
-        // Daily Login Bonus
-        function checkDailyBonus() {
-            const today = new Date().toDateString();
-            if (userData.lastLogin !== today) {
-                const bonusExp = 50 + (userData.streak * 10);
-                userData.exp += bonusExp;
-                userData.streak = (userData.lastLogin === new Date(Date.now() - 86400000).toDateString()) ? userData.streak + 1 : 1;
-                userData.lastLogin = today;
-                addAchievement(`🔥 ${userData.streak} Day Login Streak! +${bonusExp} XP`);
-                displayAIMessage(`Daily Login Bonus! +${bonusExp} XP | Streak: ${userData.streak} days!`);
-                document.getElementById('dailyBonus').innerHTML = `🎁 Daily Bonus Claimed! +${bonusExp} XP | Streak: ${userData.streak} 🔥`;
-                setTimeout(() => {
-                    document.getElementById('dailyBonus').innerHTML = '🎁 Come back tomorrow for more rewards! 🎁';
-                }, 3000);
-                saveUserData();
-                updateStats();
-                checkLevelUp();
-            }
+    // Complete workout
+    function completeWorkout(workout) {
+        if (userData.completedWorkouts.includes(workout.name)) {
+            displayAIMessage("You already completed this today. Rest, Hunter.");
+            haptic('light');
+            return;
         }
+        haptic('medium');
+        playSound('complete');
 
-        // Complete Workout with Animation
-        function completeWorkout(workout) {
-            if (userData.completedWorkouts.includes(workout.name)) {
-                displayAIMessage("Quest already completed today! Rest and recover, Hunter.");
-                return;
-            }
+        userData.exp += workout.exp;
+        userData.completedWorkouts.push(workout.name);
+        if (workout.type === 'strength') userData.strength += Math.floor(workout.exp / 20);
+        if (workout.type === 'endurance') userData.endurance += Math.floor(workout.exp / 20);
+        if (workout.type === 'agility') userData.agility += Math.floor(workout.exp / 20);
 
-            playSound('complete');
-            
-            let expGain = workout.exp;
-            userData.exp += expGain;
-            userData.completedWorkouts.push(workout.name);
+        // Achievements
+        const count = userData.completedWorkouts.length;
+        if (count === 1) addAchievement("First Blood - Completed First Quest!");
+        if (count === 5) addAchievement("Warrior's Path - 5 Quests Completed!");
+        if (count === 15) addAchievement("Shadow Veteran - 15 Quests Completed!");
+        if (count === 30) addAchievement("Monarch's Disciple - 30 Quests Completed!");
 
-            if (workout.type === 'strength') userData.strength += Math.floor(expGain / 20);
-            if (workout.type === 'endurance') userData.endurance += Math.floor(expGain / 20);
-            if (workout.type === 'agility') userData.agility += Math.floor(expGain / 20);
+        saveUserData();
+        updateStats();
+        renderWorkouts();
+        checkLevelUp();
+        displayAIMessage(`✨ Completed "${workout.name}"! +${workout.exp} XP! ${workout.type.toUpperCase()} increased! ✨`);
+    }
 
-            if (userData.completedWorkouts.length === 1) addAchievement("First Blood - Completed First Quest!");
-            if (userData.completedWorkouts.length === 10) addAchievement("Warrior's Path - 10 Quests Completed!");
-            if (userData.completedWorkouts.length === 25) addAchievement("Shadow Veteran - 25 Quests Completed!");
-            if (userData.completedWorkouts.length === 50) addAchievement("Monarch's Disciple - 50 Quests Completed!");
-
-            saveUserData();
+    function checkLevelUp() {
+        let leveled = false;
+        let needed = userData.level * 100;
+        while (userData.exp >= needed) {
+            userData.exp -= needed;
+            userData.level++;
+            leveled = true;
+            addAchievement(`⭐ LEVEL UP! Reached Level ${userData.level}! ⭐`);
+            displayAIMessage(`⚡ LEVEL UP! You are now Level ${userData.level}! ⚡`);
+            haptic('heavy');
+            playSound('levelup');
+            needed = userData.level * 100;
+        }
+        if (leveled) {
             updateStats();
-            renderWorkouts();
-            checkLevelUp();
-
-            displayAIMessage(`✨ Quest Complete! "${workout.name}" +${expGain} XP! ${workout.type.toUpperCase()} increased! ✨`);
-        }
-
-        // Level Up with Animation
-        function checkLevelUp() {
-            let expNeeded = userData.level * 100;
-            let leveledUp = false;
-            
-            while (userData.exp >= expNeeded) {
-                userData.exp -= expNeeded;
-                userData.level++;
-                leveledUp = true;
-                addAchievement(`⭐ LEVEL UP! Reached Level ${userData.level}! ⭐`);
-                displayAIMessage(`⚡ LEVEL UP! You are now Level ${userData.level}! The System grows stronger! ⚡`);
-                playSound('levelup');
-                expNeeded = userData.level * 100;
-            }
-            
-            if (leveledUp) {
-                updateStats();
-                updateRank();
-            }
-        }
-
-        // Get Rank Name
-        function getRankName() {
-            if (userData.level < 5) return "E-Rank Hunter";
-            if (userData.level < 10) return "D-Rank Hunter";
-            if (userData.level < 20) return "C-Rank Hunter";
-            if (userData.level < 35) return "B-Rank Hunter";
-            if (userData.level < 50) return "A-Rank Hunter";
-            if (userData.level < 75) return "S-Rank Hunter";
-            return "👑 SHADOW MONARCH 👑";
-        }
-
-        function updateRank() {
-            document.getElementById('rankDisplay').innerHTML = getRankName();
-            document.getElementById('rankInfo').innerHTML = `<div class="stat-card">⭐ ${getRankName()} | Level ${userData.level} | Total Quests: ${userData.completedWorkouts.length} ⭐</div>`;
-        }
-
-        function addAchievement(achievement) {
-            if (!userData.achievements.includes(achievement)) {
-                userData.achievements.unshift(achievement);
-                if (userData.achievements.length > 20) userData.achievements.pop();
-                updateAchievements();
-                displayAIMessage(`🏆 Achievement Unlocked: ${achievement} 🏆`);
-            }
-        }
-
-        function updateAchievements() {
-            const achievementsDiv = document.getElementById('achievements');
-            if (userData.achievements.length === 0) {
-                achievementsDiv.innerHTML = '<p>Complete quests to earn achievements, Hunter!</p>';
-            } else {
-                achievementsDiv.innerHTML = userData.achievements.map(a => `<span class="achievement-badge">🏆 ${a}</span>`).join('');
-            }
-        }
-
-        function updateStats() {
-            document.getElementById('strength').innerText = Math.floor(userData.strength);
-            document.getElementById('endurance').innerText = Math.floor(userData.endurance);
-            document.getElementById('agility').innerText = Math.floor(userData.agility);
-            document.getElementById('exp').innerText = `${Math.floor(userData.exp)}/${userData.level * 100}`;
-
-            document.getElementById('strengthBar').style.width = `${Math.min((userData.strength / 150) * 100, 100)}%`;
-            document.getElementById('enduranceBar').style.width = `${Math.min((userData.endurance / 150) * 100, 100)}%`;
-            document.getElementById('agilityBar').style.width = `${Math.min((userData.agility / 150) * 100, 100)}%`;
-            document.getElementById('expBar').style.width = `${(userData.exp / (userData.level * 100)) * 100}%`;
-        }
-
-        function renderWorkouts() {
-            const grid = document.getElementById('workoutGrid');
-            grid.innerHTML = allWorkouts.map(workout => `
-                <div class="workout-card ${userData.completedWorkouts.includes(workout.name) ? 'completed' : ''}" onclick="completeWorkout(${JSON.stringify(workout).replace(/"/g, '&quot;')})">
-                    <div class="workout-icon">${workout.icon}</div>
-                    <div class="workout-name">${workout.name}</div>
-                    <div class="workout-description">${workout.description}</div>
-                    <div class="workout-details">
-                        <span>⚡ ${workout.exp} XP</span>
-                        <span>🎯 ${workout.difficulty}</span>
-                        <span>${workout.sets ? workout.sets + ' sets' : ''} ${workout.duration ? workout.duration + ' sec' : ''} ${workout.reps ? workout.reps + ' reps' : ''}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function displayAIMessage(message) {
-            const aiMsg = document.getElementById('aiMessage');
-            aiMsg.innerHTML = `🤖 ${message}`;
-        }
-
-        function getAIRecommendation() {
-            const incompleteWorkouts = allWorkouts.filter(w => !userData.completedWorkouts.includes(w.name));
-            if (incompleteWorkouts.length === 0) {
-                displayAIMessage("All quests completed! Reset your progress tomorrow for more training!");
-                return;
-            }
-
-            const stats = {
-                strength: userData.strength,
-                endurance: userData.endurance,
-                agility: userData.agility
-            };
-            
-            let weakest = Object.keys(stats).reduce((a, b) => stats[a] < stats[b] ? a : b);
-            let recommended = incompleteWorkouts.filter(w => w.type === weakest)[0] || incompleteWorkouts[0];
-            
-            displayAIMessage(`📊 Analysis complete. Weakest: ${weakest}. Recommended: "${recommended.name}" - ${recommended.description}. Complete this to grow stronger!`);
-        }
-
-        function updateUserProfile() {
-            const name = document.getElementById('userName').value || "Hunter";
-            const age = parseInt(document.getElementById('userAge').value) || 25;
-            const weight = parseFloat(document.getElementById('userWeight').value) || 70;
-            const height = parseFloat(document.getElementById('userHeight').value) || 170;
-            const fitnessLevel = document.getElementById('fitnessLevel').value;
-
-            userData.name = name;
-            userData.age = age;
-            userData.weight = weight;
-            userData.height = height;
-            userData.fitnessLevel = fitnessLevel;
-
-            let baseStats = 10;
-            if (fitnessLevel === 'intermediate') baseStats = 20;
-            if (fitnessLevel === 'advanced') baseStats = 35;
-
-            userData.strength = baseStats;
-            userData.endurance = baseStats;
-            userData.agility = baseStats;
-
-            saveUserData();
-            updateStats();
-            renderWorkouts();
-            displayAIMessage(`Profile updated! Welcome ${userData.name}. Current Rank: ${getRankName()}`);
-        }
-
-        function fixErrors() {
-            const errorFixer = document.getElementById('errorFixer');
-            errorFixer.style.display = 'block';
-            
-            if (userData.strength < 0) userData.strength = 0;
-            if (userData.endurance < 0) userData.endurance = 0;
-            if (userData.agility < 0) userData.agility = 0;
-            if (userData.exp < 0) userData.exp = 0;
-            
-            userData.completedWorkouts = userData.completedWorkouts.filter(w => 
-                allWorkouts.some(workout => workout.name === w)
-            );
-            
-            saveUserData();
-            updateStats();
-            
-            setTimeout(() => {
-                errorFixer.style.display = 'none';
-            }, 2000);
-        }
-
-        function saveUserData() {
-            localStorage.setItem('soloLevelingData', JSON.stringify(userData));
-        }
-
-        function loadUserData() {
-            const saved = localStorage.getItem('soloLevelingData');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                userData = { ...userData, ...parsed };
-            }
-        }
-
-        function initSystem() {
-            loadUserData();
-            checkDailyBonus();
-            updateStats();
-            renderWorkouts();
-            updateAchievements();
             updateRank();
-            displayAIMessage("System online. Ready to begin your journey to become the Shadow Monarch!");
-            
-            setInterval(() => {
-                fixErrors();
-            }, 30000);
+            checkSkillUnlocks();
         }
+    }
 
-        initSystem();
-    </script>
+    function checkSkillUnlocks() {
+        let changed = false;
+        fightingSkills.forEach(skill => {
+            if (userData.level >= skill.levelReq && !userData.unlockedSkills.includes(skill.name)) {
+                userData.unlockedSkills.push(skill.name);
+                // apply stat bonus
+                if (skill.statBonus.strength) userData.strength += skill.statBonus.strength;
+                if (skill.statBonus.endurance) userData.endurance += skill.statBonus.endurance;
+                if (skill.statBonus.agility) userData.agility += skill.statBonus.agility;
+                addAchievement(`🎯 Unlocked Skill: ${skill.name}!`);
+                changed = true;
+            }
+        });
+        if (changed) {
+            updateStats();
+            renderSkills();
+            saveUserData();
+        }
+    }
+
+    function renderSkills() {
+        const container = document.getElementById('skillsContainer');
+        if (!container) return;
+        if (userData.unlockedSkills.length === 0) {
+            container.innerHTML = '<p>No skills yet. Reach level 3 to unlock your first skill!</p>';
+            return;
+        }
+        const skillsHtml = userData.unlockedSkills.map(skill => {
+            const skillInfo = fightingSkills.find(s => s.name === skill);
+            return `<div class="skill-badge">${skill} ${skillInfo ? `(Lv.${skillInfo.levelReq})` : ''}</div>`;
+        }).join('');
+        container.innerHTML = skillsHtml;
+    }
+
+    function addAchievement(ach) {
+        if (!userData.achievements.includes(ach)) {
+            userData.achievements.unshift(ach);
+            if (userData.achievements.length > 20) userData.achievements.pop();
+            updateAchievements();
+            displayAIMessage(`🏆 ${ach} 🏆`);
+            haptic('medium');
+        }
+    }
+
+    function updateAchievements() {
+        const div = document.getElementById('achievements');
+        if (!div) return;
+        if (userData.achievements.length === 0) div.innerHTML = '<p>Complete quests to earn achievements.</p>';
+        else div.innerHTML = userData.achievements.map(a => `<span class="achievement-badge">🏆 ${a}</span>`).join('');
+    }
+
+    function updateStats() {
+        document.getElementById('strength').innerText = Math.floor(userData.strength);
+        document.getElementById('endurance').innerText = Math.floor(userData.endurance);
+        document.getElementById('agility').innerText = Math.floor(userData.agility);
+        document.getElementById('exp').innerText = `${Math.floor(userData.exp)}/${userData.level * 100}`;
+        document.getElementById('strengthBar').style.width = `${Math.min((userData.strength/150)*100,100)}%`;
+        document.getElementById('enduranceBar').style.width = `${Math.min((userData.endurance/150)*100,100)}%`;
+        document.getElementById('agilityBar').style.width = `${Math.min((userData.agility/150)*100,100)}%`;
+        document.getElementById('expBar').style.width = `${(userData.exp/(userData.level*100))*100}%`;
+    }
+
+    function getRankName() {
+        if (userData.level < 5) return "E-Rank Hunter";
+        if (userData.level < 10) return "D-Rank Hunter";
+        if (userData.level < 20) return "C-Rank Hunter";
+        if (userData.level < 35) return "B-Rank Hunter";
+        if (userData.level < 50) return "A-Rank Hunter";
+        if (userData.level < 75) return "S-Rank Hunter";
+        return "👑 SHADOW MONARCH 👑";
+    }
+
+    function updateRank() {
+        document.getElementById('rankDisplay').innerHTML = getRankName();
+        document.getElementById('rankInfo').innerHTML = `<div class="stat-card">⭐ ${getRankName()} | Level ${userData.level} | Quests: ${userData.completedWorkouts.length} ⭐</div>`;
+    }
+
+    function renderWorkouts() {
+        const grid = document.getElementById('workoutGrid');
+        if (!grid) return;
+        grid.innerHTML = currentWorkouts.map(workout => `
+            <div class="workout-card ${userData.completedWorkouts.includes(workout.name) ? 'completed' : ''}" data-name="${workout.name}">
+                <div class="workout-icon">${workout.icon}</div>
+                <div class="workout-name">${workout.name}</div>
+                <div class="workout-description">${workout.description}</div>
+                <div class="workout-details">
+                    <span>⚡ ${workout.exp} XP</span>
+                    <span>🎯 ${workout.difficulty}</span>
+                    <span>${workout.sets ? workout.sets+' sets' : ''} ${workout.duration ? workout.duration+' sec' : ''} ${workout.reps ? workout.reps+' reps' : ''}</span>
+                </div>
+            </div>
+        `).join('');
+
+        // Attach event listeners dynamically
+        document.querySelectorAll('.workout-card').forEach(card => {
+            const name = card.getAttribute('data-name');
+            const workout = currentWorkouts.find(w => w.name === name);
+            if (workout) {
+                card.addEventListener('click', () => completeWorkout(workout));
+            }
+        });
+    }
+
+    function displayAIMessage(msg) {
+        const aiMsg = document.getElementById('aiMessage');
+        if (aiMsg) aiMsg.innerHTML = `🤖 ${msg}`;
+    }
+
+    function getAIRecommendation() {
+        const incomplete = currentWorkouts.filter(w => !userData.completedWorkouts.includes(w.name));
+        if (incomplete.length === 0) {
+            displayAIMessage("All quests done! Rest or wait for tomorrow's new quests.");
+            return;
+        }
+        const stats = { strength: userData.strength, endurance: userData.endurance, agility: userData.agility };
+        let weakest = Object.keys(stats).reduce((a,b) => stats[a] < stats[b] ? a : b);
+        let rec = incomplete.find(w => w.type === weakest) || incomplete[0];
+        displayAIMessage(`Analysis: Weakest is ${weakest}. Recommended: "${rec.name}" - ${rec.description}. Complete it to grow!`);
+        haptic('light');
+    }
+
+    function updateUserProfile() {
+        const name = document.getElementById('userName').value || "Hunter";
+        const age = parseInt(document.getElementById('userAge').value) || 25;
+        const weight = parseFloat(document.getElementById('userWeight').value) || 70;
+        const height = parseFloat(document.getElementById('userHeight').value) || 170;
+        const fitnessLevel = document.getElementById('fitnessLevel').value;
+
+        userData.name = name; userData.age = age; userData.weight = weight; userData.height = height; userData.fitnessLevel = fitnessLevel;
+        let base = 10; if (fitnessLevel === 'intermediate') base = 20; if (fitnessLevel === 'advanced') base = 35;
+        userData.strength = base; userData.endurance = base; userData.agility = base;
+        saveUserData();
+        updateStats();
+        displayAIMessage(`Profile updated! Welcome ${userData.name}. Rank: ${getRankName()}`);
+        haptic('light');
+    }
+
+    function checkDailyBonus() {
+        const today = new Date().toDateString();
+        if (userData.lastLogin !== today) {
+            const bonus = 50 + (userData.streak * 10);
+            userData.exp += bonus;
+            userData.streak = (userData.lastLogin === new Date(Date.now() - 86400000).toDateString()) ? userData.streak + 1 : 1;
+            userData.lastLogin = today;
+            addAchievement(`🔥 ${userData.streak} Day Streak! +${bonus} XP`);
+            displayAIMessage(`Daily Bonus! +${bonus} XP | Streak: ${userData.streak} days!`);
+            document.getElementById('dailyBonus').innerHTML = `🎁 Bonus Claimed! +${bonus} XP | Streak: ${userData.streak} 🔥`;
+            setTimeout(() => { document.getElementById('dailyBonus').innerHTML = '🎁 Come back tomorrow for more rewards!'; }, 4000);
+            saveUserData();
+            updateStats();
+            checkLevelUp();
+        } else {
+            document.getElementById('dailyBonus').innerHTML = `🎁 Daily bonus already claimed. Streak: ${userData.streak} days 🔥`;
+        }
+    }
+
+    function fixErrors() {
+        const fixDiv = document.getElementById('errorFixer');
+        fixDiv.style.display = 'block';
+        if (userData.strength < 0) userData.strength = 0;
+        if (userData.endurance < 0) userData.endurance = 0;
+        if (userData.agility < 0) userData.agility = 0;
+        if (userData.exp < 0) userData.exp = 0;
+        userData.completedWorkouts = userData.completedWorkouts.filter(w => currentWorkouts.some(cw => cw.name === w));
+        saveUserData();
+        updateStats();
+        setTimeout(() => fixDiv.style.display = 'none', 2000);
+    }
+
+    function init() {
+        loadUserData();
+        refreshDailyWorkouts();  // sets currentWorkouts and resets completed for new day
+        checkDailyBonus();
+        updateStats();
+        updateRank();
+        updateAchievements();
+        renderSkills();
+        checkSkillUnlocks();
+        displayAIMessage("System online. Begin your journey to become the Shadow Monarch!");
+        setInterval(() => fixErrors(), 30000);
+        // Attach UI buttons
+        document.getElementById('initBtn').addEventListener('click', updateUserProfile);
+        document.getElementById('aiRecommendBtn').addEventListener('click', getAIRecommendation);
+        // Enable haptics on first user interaction (iOS requires user gesture for vibration? but we'll try)
+        document.body.addEventListener('touchstart', () => { if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(1); }, { once: true });
+    }
+
+    init();
+</script>
 </body>
 </html>
